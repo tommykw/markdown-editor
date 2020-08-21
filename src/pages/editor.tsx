@@ -1,13 +1,14 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import * as ReactMarkdown from 'react-markdown'
 import { putMemo } from '../indexeddb/memos'
 import { Button } from '../components/button'
 import { SaveModal } from '../components/save_modal'
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header'
+import ConvertMarkdownWorker from 'worker-loader!../worker/convert_markdown_worker'
 
-const { useState } = React
+const convertMarkdownWorker = new ConvertMarkdownWorker()
+const { useState, useEffect } = React
 
 const Wrapper = styled.div`
   bottom: 0;
@@ -55,6 +56,17 @@ interface Props {
 export const Editor: React.FC<Props> = (props) => {
   const { text, setText } = props
   const [showModal, setShowModal] = useState(false)
+  const [html, setHtml] = useState('')
+
+  useEffect(() => {
+    convertMarkdownWorker.onmessage = (event) => {
+      setHtml(event.data.html)
+    }
+  }, [])
+
+  useEffect(() => {
+    convertMarkdownWorker.postMessage(text)
+  }, [text])
 
   return (
     <>
@@ -74,7 +86,7 @@ export const Editor: React.FC<Props> = (props) => {
           value={text}
         />
         <Preview>
-            <ReactMarkdown source={text} />
+          <div dangerouslySetInnerHTML={{ __html: html }} />
         </Preview>
       </Wrapper>
       {showModal && (
