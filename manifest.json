@@ -7,7 +7,7 @@
         "src": "./image/icon_256x256.png",
         "sizes":"256x256",
         "type": "image/png"
-      }s
+      }
     ],
     "start_url": "./index.html",
     "display": "standalone",
