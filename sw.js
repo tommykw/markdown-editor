@@ -1,11 +1,11 @@
 const CacheName = 'Cache:v1'
 
-self.addEventListener('install', (event) => {
-    console.log('ServiceWorker install:', event)
-})
-
-self.addEventListener('activate', (event) => {
-    console.log('ServiceWorker activate:', event)
+self.addEventListener('install', (event) => {  
+    console.log('ServiceWorker install:', event)  
+  })  
+    
+self.addEventListener('activate', (event) => {  
+  console.log('ServiceWorker activate:', event)  
 })
 
 self.addEventListener('fetch', (event) => {
@@ -13,7 +13,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(fetch(event.request))
 })
 
-const networkFaillingBackToCache = async (request) => {
+const networkFallingBackToCache = async (request) => {
     const cache = await caches.open(CacheName)
     try {
         const response = await fetch(request)
@@ -26,5 +26,5 @@ const networkFaillingBackToCache = async (request) => {
 }
 
 self.addEventListener('fetch', (event) => {
-    event.respondWith(networkFaillingBackToCache(event.request))
+    event.respondWith(networkFallingBackToCache(event.request))
 })
