@@ -1,5 +1,5 @@
 # markdown-editor
-A markdown editor implemented with React.js and TypeScript. Also PWA support.
+A markdown editor implemented with React.js and TypeScript. Also PWA supported.
 
 ## Demo
 Online demo: https://tommykw.github.io/markdown-editor/
