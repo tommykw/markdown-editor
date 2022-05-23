@@ -12,7 +12,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/sanitize-html": "^1.23.3",
     "@types/styled-components": "^5.1.0",
-    "dexie": "^3.0.1",
+    "dexie": "^3.2.2",
     "marked": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
